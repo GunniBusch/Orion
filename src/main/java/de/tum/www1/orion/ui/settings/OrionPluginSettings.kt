@@ -5,7 +5,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
-import com.intellij.openapi.util.io.toNioPath
+import com.intellij.openapi.util.io.toNioPathOrNull
 import com.intellij.ui.dsl.builder.Align
 import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.bindText
@@ -13,7 +13,8 @@ import com.intellij.ui.dsl.builder.panel
 import de.tum.www1.orion.settings.OrionSettingsProvider
 import de.tum.www1.orion.ui.browser.BrowserUIInitializationService
 import de.tum.www1.orion.util.translate
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang3.StringUtils
+
 import javax.swing.JCheckBox
 import javax.swing.JComponent
 import javax.swing.JPanel
@@ -88,7 +89,7 @@ class OrionPluginSettings(private val project: Project) : SearchableConfigurable
                     translate("orion.settings.path.browser.title"),
                     null,
                     FileChooserDescriptorFactory.createSingleFolderDescriptor()
-                ).bindText({ currentProjectPath }) { it.toNioPath() }.align(Align.FILL).component
+                ).bindText({ currentProjectPath }) { it.toNioPathOrNull() }.align(Align.FILL).component
             }
             row {
                 label(translate("orion.settings.tutorPath.label"))
@@ -98,7 +99,7 @@ class OrionPluginSettings(private val project: Project) : SearchableConfigurable
                     translate("orion.settings.tutorPath.browser.title"),
                     null,
                     FileChooserDescriptorFactory.createSingleFolderDescriptor()
-                ).bindText({ currentTutorPath }) { it.toNioPath() }.align(Align.FILL).component
+                ).bindText({ currentTutorPath }) { it.toNioPathOrNull() }.align(Align.FILL).component
             }
             row {
                 label(translate("orion.settings.instructorPath.label"))
@@ -108,7 +109,7 @@ class OrionPluginSettings(private val project: Project) : SearchableConfigurable
                     translate("orion.settings.instructorPath.browser.title"),
                     null,
                     FileChooserDescriptorFactory.createSingleFolderDescriptor()
-                ).bindText({ currentInstructorPath }) { it.toNioPath() }.align(Align.FILL).component
+                ).bindText({ currentInstructorPath }) { it.toNioPathOrNull() }.align(Align.FILL).component
             }
             row {
                 label(translate("orion.settings.commit.message.title")).bold()
